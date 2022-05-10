@@ -99,4 +99,60 @@ Install the **"ES7+ React/Redux/React-Native snippets"** VisualStudio Code.
 - When you have to update state based on the previous state value, pass in a function as an argument instead of the
   regular object.
 
-# Destructuring props and state
+# Binding event handlers
+This is done because the **this** keyword.
+
+1. Binding in the render() method:
+```
+...
+    clickHandler = () => {
+        this.setState((prevState) => ({
+            message: 'Goodbye!'
+        }))
+    }
+...
+  render() {
+    return (
+      <div>
+          <div>{R.path(['message'], this.state)}</div>
+          <button onClick={this.clickHandler.bind(this)}>Click</button>
+      </div>
+    )
+  }
+  ...
+```
+
+2. Use arrow functions in the render() method (is the easiest way to pass parameters):
+```
+...
+<button onClick={ () => this.clickHandler()}>Click</button>
+...
+```
+
+3. To do the event binding in the class constructor:
+```
+...
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+         message: 'Hello'
+      }
+
+      this.clickHandler = this.clickHandler.bind(this)
+    }
+...
+
+  render() {
+    return (
+      <div>
+          <div>{R.path(['message'], this.state)}</div>
+          <button onClick={this.clickHandler}>Click</button>
+      </div>
+    )
+  }
+
+```
+
+With the last approach, the binding process just happens once and not every time that the component is re-render, if
+the biding is done in the render() method.
