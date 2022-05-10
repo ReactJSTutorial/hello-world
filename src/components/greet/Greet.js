@@ -2,10 +2,13 @@ import React from 'react';
 import * as R from 'ramda';
 
 const Greet = (props) => {
+
+    const {name, heroName, children} = props
+
     return (
         <div>
-            <h1>Hello {R.path(['name'], props)} a.k.a {R.path(['heroName'], props)}</h1>
-            {R.path(['children'], props)}
+            <h1>Hello {name} a.k.a {heroName}</h1>
+            {children}
         </div>
     );
 }

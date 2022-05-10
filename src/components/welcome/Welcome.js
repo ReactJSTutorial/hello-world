@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import * as R from 'ramda';
 
 export default class Welcome extends Component {
+  
   render() {
+    const {name, heroName} = this.props
+    const {state1, state2} = this.state
+
     return (
       <div>
-        <h1>Welcome {R.path(['name'], this.props)} a.k.a {R.path(['heroName'], this.props)}</h1>
+        <h1>Welcome {name} a.k.a {heroName}</h1>
       </div>
     )
   }

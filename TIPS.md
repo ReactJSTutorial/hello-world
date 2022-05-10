@@ -98,3 +98,5 @@ Install the **"ES7+ React/Redux/React-Native snippets"** VisualStudio Code.
   second argument to the **setState** method.
 - When you have to update state based on the previous state value, pass in a function as an argument instead of the
   regular object.
+
+# Destructuring props and state
