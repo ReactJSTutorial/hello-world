@@ -25,3 +25,42 @@ rsf->  == stateless named function skeleton
 - Complex UI logic.
 - Provide lifecycle hooks.
 - Thhey are called as Stateful/Smart/Container components.
+
+# State
+
+## props vs state
+            props                                           state
+            -----                                           -----
+- props get passed to the component        - state is managed within the component
+- Function parameters                      - Variables declared in the function body
+- props are immutable                      - state can be changed
+- props -> Functional Components           - useState Hook -> Functional Components 
+  this.props -> Class Components             this.state -> Class Components
+
+### Using state in Class Components
+1. Create the state object and initialize it. Its usually done inside the class constructor:
+```
+...
+constructor() {
+  super();
+  this.state = {
+    message: 'Welcome visitor'
+  };
+}
+
+changeMessage = () => {
+    this.setState({
+        message: 'Thank you for subscribing'
+    });
+}
+
+render() {
+    return (
+        <div>
+          <h1>{R.path(['message'], this.state)}</h1> 
+          <button onClick={ () => this.changeMessage()}>Subscribe</button>  
+        </div>
+    );
+}
+...
+```
