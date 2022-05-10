@@ -41,8 +41,8 @@ rsf->  == stateless named function skeleton
 1. Create the state object and initialize it. Its usually done inside the class constructor:
 ```
 ...
-constructor() {
-  super();
+constructor(props) {
+  super(props);
   this.state = {
     message: 'Welcome visitor'
   };
@@ -64,3 +64,37 @@ render() {
 }
 ...
 ```
+
+# setState
+Install the **"ES7+ React/Redux/React-Native snippets"** VisualStudio Code.
+**rconst** : Create the component's constructor initialized with an state object
+```
+...
+    increment = () => {
+        this.setState((prevState, props) => ({
+            count: R.inc(R.path(['count'], prevState))
+        }))
+    }
+
+    decrement = () => {
+        this.setState((prevState) => ({
+            count: R.dec(R.path(['count'], prevState))
+        }))
+    }  
+   
+    
+  render() {
+    return (
+      <div>
+        <p>Counter: {R.path(['count'], this.state)}</p>
+        <button onClick={ () => this.increment()}>Increment</button>
+        <button onClick={ () => this.decrement()}>Decrement</button>
+      </div>
+    )
+  }
+```
+- Always make use of **setState** and never modify the state directly.
+- Code has to be executed after the state has been updated? Place that code in the callback function which is the
+  second argument to the **setState** method.
+- When you have to update state based on the previous state value, pass in a function as an argument instead of the
+  regular object.
