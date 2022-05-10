@@ -6,11 +6,13 @@ import Counter from 'components/counter/Counter';
 import FunctionClick from 'components/function-click/FunctionClick';
 import ClassClick from 'components/class-click/ClassClick';
 import EventBind from 'components/event-bind/EventBind';
+import ParentComponent from 'components/parent-component/ParentComponent';
 
 function App() {
   return (
     <div className="App">
-      <EventBind />
+      <ParentComponent />
+      {/*<EventBind />
       {/*<FunctionClick/>
       <ClassClick />
       <Greet name="Diana" heroName="Wonder Woman"></Greet>

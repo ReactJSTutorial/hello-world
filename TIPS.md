@@ -156,3 +156,74 @@ This is done because the **this** keyword.
 
 With the last approach, the binding process just happens once and not every time that the component is re-render, if
 the biding is done in the render() method.
+
+# Methods as props
+It's used when a child component wants to commnuicate with the parent component. In this case, we will use **props**, but
+this time, we will pass **a reference to a method as props** to the child component.
+
+**ParentComponent**
+We pass to the child component a parent method reference as  a props:
+```
+class ParentComponent extends Component {
+  
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+         parentName: 'Parent'
+      }
+
+      this.greetParent = this.greetParent.bind(this)
+    }
+
+    greetParent = () => {
+        alert(R.concat('Hello ', R.path(['parentName'], this.state)))
+    }
+
+    render() {
+        return (
+        <div>
+            <ChildComponent greetHandler={this.greetParent} />
+        </div>
+        )
+    }
+}
+
+export default ParentComponent
+```
+
+**ChildComponent**
+From the props in the child component, we can execute the parent methods passed as reference to it:
+```
+const ChildComponent = (props) => {
+  return (
+    <div>
+        <button onClick={R.path(['greetHandler'], props)}>Greet Parent</button>
+    </div>
+  )
+}
+
+export default ChildComponent
+```
+
+## Pass a parameter and calling the parent method from the child component
+For this, we will use arrow function, because is the easiest way to pass parameters from the child component to the parent component.
+**ChildComponent**
+```
+const ChildComponent = (props) => {
+  return (
+    <div>
+        <button onClick={ () => props.greetHandler('child')}>Greet Parent</button>
+    </div>
+  )
+}
+```
+
+**ParentComponent**
+```
+...
+greetParent = (childName) => {
+        alert(R.concat('Hello ', R.concat(R.path(['parentName'], this.state), ' from ' + childName)) )
+    }
+...
+```
